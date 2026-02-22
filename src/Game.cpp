@@ -95,6 +95,25 @@ void Game::handleInput(){
     }
 }
 
+void Game::render() {
+    window.clear(sf::Color::Black);  
+    
+    // Draw each live cell
+    for (int row = 0; row < grid.getRows(); ++row) {
+        for (int col = 0; col < grid.getCols(); ++col) {
+            if (grid.isAlive(row, col)) {
+                // Create a rectangle for this cell
+                sf::RectangleShape cell(sf::Vector2f(float(cellsize - 1), float(cellsize - 1)));
+                cell.setPosition({float(col * cellsize), float(row * cellsize)});
+                cell.setFillColor(sf::Color::White);
+                window.draw(cell);
+            }
+        }
+    }
+    
+    window.display();
+}
+
 void Game::togglePause() {
     isPaused = !isPaused;
 }

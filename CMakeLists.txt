@@ -7,7 +7,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(SFML 3.0.2 COMPONENTS Graphics Window System REQUIRED)
 
-add_executable(CellularAutomata src/main.cpp)
+add_executable(CellularAutomata 
+    src/main.cpp
+    src/Game.cpp
+    src/Grid.cpp
+    )
 
 target_link_libraries(CellularAutomata PRIVATE SFML::Graphics SFML::Window SFML::System)
 

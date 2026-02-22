@@ -25,9 +25,8 @@ public:
 	Game(int gridRows, int gridCols, int cellSize);
 	void run();
 	void handleInput();
-	void update();
 	void render();
 	void togglePause();
 	void clearGrid();
-	void randomizeGrid();
+	void randomiseGrid();
 };
