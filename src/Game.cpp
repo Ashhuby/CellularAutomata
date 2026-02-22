@@ -38,6 +38,7 @@ void Game::handleInput(){
             window.close();
         }
         
+        // Key presses
         if (auto* keyEvent = event->getIf<sf::Event::KeyPressed>()) {
             
             if (keyEvent->scancode == sf::Keyboard::Scancode::Space) {
@@ -51,6 +52,43 @@ void Game::handleInput(){
             else if (keyEvent->scancode == sf::Keyboard::Scancode::R) {
                 // Randomize grid
                 randomiseGrid();
+            }
+        }
+
+        // Mouse Presses
+        if (auto* mouseEvent = event->getIf<sf::Event::MouseButtonPressed>()) {
+            if (mouseEvent->button == sf::Mouse::Button::Left) {
+                // Get mouse position in window
+                sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+                
+                // Convert to grid coordinates
+                int gridX = pixelPos.y / cellsize;  // Y is row
+                int gridY = pixelPos.x / cellsize;  // X is column
+                
+                // Check bounds and toggle
+                if (gridX >= 0 && gridX < grid.getRows() && 
+                    gridY >= 0 && gridY < grid.getCols()) {
+                    grid.toggleCell(gridX, gridY);
+                }
+            }
+        }
+
+        // Mouse movement (for dragging)
+        if (auto* mouseEvent = event->getIf<sf::Event::MouseMoved>()) {
+            // Check if left button is currently pressed
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
+                // Get current mouse position
+                sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+                
+                // Convert to grid coordinates
+                int gridRow = pixelPos.y / cellsize;
+                int gridCol = pixelPos.x / cellsize;
+                
+                // Check bounds and toggle cell
+                if (gridRow >= 0 && gridRow < grid.getRows() && 
+                    gridCol >= 0 && gridCol < grid.getCols()) {
+                    grid.toggleCell(gridRow, gridCol);
+                }
             }
         }
     
