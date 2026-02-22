@@ -21,13 +21,46 @@ int Grid::countLiveNeighbors(int x, int y) const {
     int count = 0;
     for(int i = -1; i <= 1; i++) {
         for(int j = -1; j <= 1; j++) {
-            if((x + i >= 0 && x + i < rows) || (y + i >= 0 && y + i < cols)) continue;
             if(i == 0 && j == 0) continue; // Skip the cell itself
-            if(currentState[i][j] == 1) count++;
+            
+            int checkX = x + i;
+            int checkY = y + j;
+            // Check if out of bounds 
+            if(checkX < 0 || checkX >= rows || checkY < 0 || checkY >= cols) {
+                continue;
+            }            
+            if(currentState[checkX][checkY]) {
+                count++;
+            }                            
         }
     }
     return count;
 }
 
+void Grid::update(){
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < cols; j++){
+            int count = countLiveNeighbors(i,j);
 
+            if(currentState[i][j]){
+                if(count == 2 || count == 3){
+                    nextState[i][j] = true;
+                } 
+                else{
+                    nextState[i][j] = false;
+                }
+            }
+            else {   // Cell is dead
+                if(count == 3){
+                    nextState[i][j] = true;
+                }
+                else{
+                    nextState[i][j] = false;
+                }                
+            }         
+        }
+    }
+    std::swap(currentState,nextState);
+}
+ 
 
