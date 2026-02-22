@@ -74,7 +74,7 @@ void Grid::toggleCell(int x, int y) {
 void Grid::clear() {
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
-            currentState[x][y] = false;
+            currentState[i][j] = false;
         }
     }
 }

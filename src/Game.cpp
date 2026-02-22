@@ -37,6 +37,34 @@ void Game::handleInput(){
         if (event->is<sf::Event::Closed>()) {
             window.close();
         }
-
+        
+        if (auto* keyEvent = event->getIf<sf::Event::KeyPressed>()) {
+            
+            if (keyEvent->scancode == sf::Keyboard::Scancode::Space) {
+                // Toggle pause
+                togglePause();
+            }
+            else if (keyEvent->scancode == sf::Keyboard::Scancode::C) {
+                // Clear grid
+                clearGrid();
+            }
+            else if (keyEvent->scancode == sf::Keyboard::Scancode::R) {
+                // Randomize grid
+                randomiseGrid();
+            }
+        }
+    
     }
+}
+
+void Game::togglePause() {
+    isPaused = !isPaused;
+}
+
+void Game::clearGrid() {
+    grid.clear();
+}
+
+void Game::randomiseGrid() {
+    grid.randomise();
 }
