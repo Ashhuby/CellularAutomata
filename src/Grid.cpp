@@ -63,4 +63,18 @@ void Grid::update(){
     std::swap(currentState,nextState);
 }
  
+bool Grid::isAlive(int x, int y) const {
+    return currentState[i][j];
+}
 
+void Grid::toggleCell(int x, int y) {
+    currentState[i][j] = currentState[i][j] * -1;
+}
+
+void Grid::clear() {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            currentState[i][j] = false;
+        }
+    }
+}
