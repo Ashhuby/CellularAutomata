@@ -7,6 +7,7 @@ Game::Game(int pGridRows, int pGridCols, int pCellSize)
     windowHeight(pGridRows* pCellSize),
     updateInterval(0.1f),
     timeSinceLastUpdate(0.0f),
+    speedMultiplier(1.0f), 
     isRunning(true),
     isPaused(true)
 {
@@ -41,17 +42,26 @@ void Game::handleInput(){
         // Key presses
         if (auto* keyEvent = event->getIf<sf::Event::KeyPressed>()) {
             
-            if (keyEvent->scancode == sf::Keyboard::Scancode::Space) {
+            if (keyEvent->scancode == sf::Keyboard::Scancode::Space) {  // Space key
                 // Toggle pause
                 togglePause();
             }
-            else if (keyEvent->scancode == sf::Keyboard::Scancode::C) {
+            else if (keyEvent->scancode == sf::Keyboard::Scancode::C) { // C key
                 // Clear grid
                 clearGrid();
             }
-            else if (keyEvent->scancode == sf::Keyboard::Scancode::R) {
+            else if (keyEvent->scancode == sf::Keyboard::Scancode::R) { // R key
                 // Randomize grid
                 randomiseGrid();
+            }
+            else if (keyEvent->scancode == sf::Keyboard::Scancode::Equal) {  // + key
+                speedMultiplier *= 1.5f;
+                updateInterval = 0.1f / speedMultiplier;  // Smaller interval = faster
+            }
+            else if (keyEvent->scancode == sf::Keyboard::Scancode::Hyphen) {  // - key
+                speedMultiplier /= 1.5f;
+                if (speedMultiplier < 0.1f) speedMultiplier = 0.1f;  // Min speed
+                updateInterval = 0.1f / speedMultiplier;
             }
         }
 

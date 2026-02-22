@@ -17,6 +17,7 @@ private:
 	sf::Clock clock;
 	float updateInterval;  // seconds between generations
 	float timeSinceLastUpdate;
+	float speedMultiplier;
 
 	// Game state
 	bool isRunning;
