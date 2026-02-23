@@ -134,7 +134,7 @@ void Game::handleInput() {
         if (auto* mouseEvent = event->getIf<sf::Event::MouseMoved>()) {
             sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
 
-            if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Middle)) {
+            if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Middle) || (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))) {
                 sf::Vector2f delta(static_cast<float>(pixelPos.x - lastMousePos.x),
                                    static_cast<float>(pixelPos.y - lastMousePos.y));
                 view.move(sf::Vector2f(-delta.x, -delta.y));
