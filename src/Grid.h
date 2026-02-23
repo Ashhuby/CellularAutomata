@@ -17,5 +17,6 @@ public:
     void toggleCell(int x, int y);                   // for mouse interaction
     void clear();                                   // sets all cells to dead
     int getRows() const { return rows; }           
-    int getCols() const { return cols; }          
+    int getCols() const { return cols; }  
+    int countLiveCells() const;        
 };

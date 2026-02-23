@@ -15,6 +15,13 @@ add_executable(CellularAutomata
 
 target_link_libraries(CellularAutomata PRIVATE SFML::Graphics SFML::Window SFML::System)
 
+# Copy font to output directory
+add_custom_command(TARGET CellularAutomata POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_SOURCE_DIR}/BarFont.ttf
+        $<TARGET_FILE_DIR:CellularAutomata>/BarFont.ttf
+)
+
 if(WIN32)
     # This will copy all dependent DLLs (including freetype, zlib, bzip2, libpng, etc.)
     add_custom_command(TARGET CellularAutomata POST_BUILD

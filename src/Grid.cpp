@@ -78,3 +78,13 @@ void Grid::clear() {
         }
     }
 }
+
+int Grid::countLiveCells() const {
+    int count = 0;
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            if (currentState[i][j]) count++;
+        }
+    }
+    return count;
+}
